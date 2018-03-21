@@ -38,6 +38,10 @@ Currently, version 0.1.4-beta2 of the custom firmware is the highest supported. 
 Some alternative Yi firmwares enable an experimental RTSP server, which will allow you to connect to your camera via other Home Assistant camera platforms. However, this RTSP server disables the ability to use the supremely-useful Yi Home app. In order to maintain both Home Assistant compatibility _and_ the native app, this platform retrieves videos via FTP.
 </p>
 
+<p class='note warning'>
+In order to use the camera on firmware version 0.1.5, there is an option to revert back from Pure-FTPd. Open Telnet/SSH and edit system.sh on /home/yi-hack-v3/script/system.sh using vi or any other text editor. Go to line 36, delete it (pure-ftpd -B) and write back the original line ( tcpsvd -vE 0.0.0.0 21 ftpd -w & ). Save and reboot the camera.
+</p>
+
 ### {% linkable_title Changing the FTP Password %}
 
 Once the custom firmware is installed, a password must be added to the FTP
@@ -85,3 +89,7 @@ camera:
     path: /home/camera/feed
     ffmpeg_arguments: '-vf scale=800:450'
 ```
+
+## {% linkable_title Tip %}
+
+If camera image is not available, your platform may be missing ffmeg. Install it and refresh Home Assistant page.
